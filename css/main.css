@@ -284,7 +284,10 @@ body {
     background: #0ea0f0;
 }
 
-
+.day__people .day__person:nth-of-type(n+4) {
+    width: 33.33%;
+    flex-grow: 0;
+}
 
 
 
