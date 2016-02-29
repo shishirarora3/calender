@@ -17,6 +17,9 @@ CalenderView.prototype.init = function(){
 	    }
 	    var date = new Date(m[2]);
 	    var day = date.getDay();
+	    if(Number.isNaN(day)){
+	    	continue;
+	    }
 	    var name= m[1];
 	    var nameSplitted = name.split(' ');
 	    peopleCollectionGroup[day] = peopleCollectionGroup[day] || [];
@@ -35,25 +38,30 @@ CalenderView.prototype.init = function(){
 };
 CalenderView.prototype.render = function(people, day){
 	let calDay = document.querySelector(`[data-day=${dayMap[day]}]`),
-	classString = callDay.className	;
-	if(people.length){
+	classString;
+
+	classString = calDay.className	;
+	if(!people.length){
 		classString += ' day--empty';
 	}else{
 		classString = classString.replace('day--empty','');
 	}
-	callDay.className = classString;
+	calDay.className = classString;
 	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person">${person['initials']}	</div>`,'');
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
 };
 CalenderView.prototype.attachEvents = function(){
-	var that = this;
+	var that = this,
+	peopleCollectionGroup;
 	document.querySelector('.app__button').addEventListener('click',e=>{
-		var yearInput = document.querySelector('.app__input').value;
-		that.content = document.getElementById('json-input').innerHTML;
+		var peopleCollectionGroup,
+		yearInput = document.querySelector('.app__input').value;
+		that.content = document.getElementById('json-input').value;
 		that.init();
+		peopleCollectionGroup = that.peopleCollectionGroup;
 		for (let day in peopleCollectionGroup){
-		let people = peopleCollectionGroup[day].filter(a=>a.year===yearInput).sort((a,b) => a.date-b.date );
+		let people = peopleCollectionGroup[day].filter(a=>{return (!yearInput || a.year===yearInput);}).sort((a,b) => a.date-b.date );
 		that.render(people, day);
 		}
 	},false);
@@ -62,7 +70,7 @@ CalenderView.prototype.attachEvents = function(){
 
 
 
-var calenderModel = document.getElementById('json-input').innerHTML;
+var calenderModel = document.getElementById('json-input').value;
 new CalenderView(calenderModel);
 
 
