@@ -39,8 +39,7 @@ CalenderView.prototype.render = function(people, day){
 	elem && (elem.innerHTML = dayPersonHtml);
 };
 CalenderView.prototype.attachEvents = function(){
-	var that = this,
-	that.eventAttached = true;
+	var that = this;
 	document.querySelector('.app__button').addEventListener('click',e=>{
 		var yearInput = document.querySelector('.app__input').value;
 		that.content = document.getElementById('json-input').innerHTML;
