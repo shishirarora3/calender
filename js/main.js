@@ -34,8 +34,16 @@ CalenderView.prototype.init = function(){
 	}	
 };
 CalenderView.prototype.render = function(people, day){
+	let calDay = document.querySelector(`[data-day=${dayMap[day]}]`),
+	classString = callDay.className	;
+	if(people.length){
+		classString += ' day--empty';
+	}else{
+		classString = classString.replace('day--empty','');
+	}
+	callDay.className = classString;
 	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person">${person['initials']}	</div>`,'');
-	var elem = document.querySelector(`[data-day=${dayMap[day]}] .day__people`);
+	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
 };
 CalenderView.prototype.attachEvents = function(){
