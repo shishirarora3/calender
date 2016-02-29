@@ -3,6 +3,7 @@
 var CalenderView = function(content){
 	this.content = content;
 	this.init();
+	this.attachEvents();
 };
 CalenderView.prototype.init = function(){
 	var m;
@@ -31,7 +32,6 @@ CalenderView.prototype.init = function(){
 		peopleCollectionGroup[day] = people.sort((a,b) => a.date-b.date );
 		this.render(people, day);
 	}	
-	this.attachEvents();
 };
 CalenderView.prototype.render = function(people, day){
 	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person">${person['initials']}	</div>`,'');
@@ -40,9 +40,11 @@ CalenderView.prototype.render = function(people, day){
 };
 CalenderView.prototype.attachEvents = function(){
 	var that = this,
-	peopleCollectionGroup = that.peopleCollectionGroup;
+	that.eventAttached = true;
 	document.querySelector('.app__button').addEventListener('click',e=>{
 		var yearInput = document.querySelector('.app__input').value;
+		that.content = document.getElementById('json-input').innerHTML;
+		that.init();
 		for (let day in peopleCollectionGroup){
 		let people = peopleCollectionGroup[day].filter(a=>a.year===yearInput).sort((a,b) => a.date-b.date );
 		that.render(people, day);
