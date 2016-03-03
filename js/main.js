@@ -18,6 +18,7 @@ CalenderView.prototype.processContent = function(){
 	        re.lastIndex++;
 	    }
 	    yearInput && (m[2] = m[2].replace(/\/(\d{4})/g,yearInput));
+	    date = new Date(m[2]);
 	    day = date.getDay();
 	    
 	    if(Number.isNaN(day)){
