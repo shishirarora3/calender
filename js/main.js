@@ -1,7 +1,7 @@
 "use strict";
 
 var CalenderView = function(){
-	this.readInput().processContent().attachEvents();
+	this.readInput().processContent().render().attachEvents();
 };
 CalenderView.prototype.processContent = function(){
 	var that = this,
@@ -56,6 +56,7 @@ CalenderView.prototype.render = function(people, day){
 	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${Helpers.findWidth(peopleLength)}%">${person['initials']}	</div>`,'');
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
+	return this;
 };
 CalenderView.prototype.readInput = function(){
 	var that = this;
@@ -69,8 +70,7 @@ CalenderView.prototype.attachEvents = function(){
 	var that = this,
 	peopleCollectionGroup;
 	document.querySelector('.app__button').addEventListener('click',e=>{
-		that.readInput();
-		that.processContent();
+		this.readInput().processContent().render();
 	},false);
 	return that;
 };
