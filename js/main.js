@@ -2,10 +2,10 @@
 
 var CalenderView = function(content){
 	this.content = content;
-	this.init();
+	this.processContent();
 	this.attachEvents();
 };
-CalenderView.prototype.init = function(){
+CalenderView.prototype.processContent = function(yearInput){
 	var m;
 	var content = this.content;
 	var regPattern = findStrings(content,['name','birthday']);
@@ -17,6 +17,7 @@ CalenderView.prototype.init = function(){
 	    }
 	    var date = new Date(m[2]);
 	    var day = date.getDay();
+	    yearInput && date.setYear( yearInput );
 	    if(Number.isNaN(day)){
 	    	continue;
 	    }
@@ -58,12 +59,7 @@ CalenderView.prototype.attachEvents = function(){
 		var peopleCollectionGroup,
 		yearInput = document.querySelector('.app__input').value;
 		that.content = document.getElementById('json-input').value;
-		that.init();
-		peopleCollectionGroup = that.peopleCollectionGroup;
-		for (let day in peopleCollectionGroup){
-		let people = peopleCollectionGroup[day].filter(a=>{return (!yearInput || a.year===yearInput);}).sort((a,b) => a.date-b.date );
-		that.render(people, day);
-		}
+		that.processContent(yearInput);
 	},false);
 
 };
