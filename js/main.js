@@ -7,7 +7,7 @@ CalenderView.prototype.processContent = function(){
 	var that = this,
 	m,
 	content = that.calenderModel.content,
-	yearInput = thatcalenderModel.yearInput,
+	yearInput = that.calenderModel.yearInput,
 	regPattern = findStrings(content,['name','birthday']),
 	re = new RegExp(regPattern, 'g'),
 	date,
