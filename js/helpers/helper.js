@@ -1,4 +1,6 @@
-var findStrings = function(content, strings){
+"use strict";
+var Helpers = {
+	findStrings:function(content, strings){
 		var len = strings.length;
 		var spaceGroups = `\\s*\\r*\\n*\\t*`;
 		var capturingGroup = `\"(.+)\"`
@@ -13,24 +15,32 @@ var findStrings = function(content, strings){
 		},'');
 		//var pattern = "/name\s*\r*\n*\t*:\s*\"(.+)\"\,\s*\r*\n*\t*birthday\s*\r*\n*\t*:\s*\"(.+)\"/g";
 		return patternString;
-	};
+	},
+	dayMap:{
+		0:'sun',
+		1:'mon',
+		2:'tue',
+		3:'wed',
+		4:'thu',
+		5:'fri',
+		6:'sat'
+	},
+	memoizedWidths:{},
+	findWidth: n =>{
+			let memoizedWidth = Helpers.memoizedWidths[n];
+			if(memoizedWidth){
+				return this.memoizedWidth
+			}
+			 for (let k=1;k<=n;k++){
+			    for(let i =1; i<=n; i++){
+			      if((k*k)>=n){
+			      	memoizedWidth = Helpers.memoizedWidths[n] = 100/k;
+			        return memoizedWidth;
+			      } 
+			    }
+			  }
+			}
+		
+};
 
-var dayMap={
-0:'sun',
-1:'mon',
-2:'tue',
-3:'wed',
-4:'thu',
-5:'fri',
-6:'sat'
-};
-var findWidth = n =>{
- for (let k=1;k<=n;k++){
-    for(let i =1; i<=n; i++){
-      if((k*k)>=n){
-        return (100/k);
-      } 
-    }
-  }
-};
 
