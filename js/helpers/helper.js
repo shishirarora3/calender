@@ -24,3 +24,13 @@ var dayMap={
 5:'fri',
 6:'sat'
 };
+var findWidth = n =>{
+ for (let k=1;k<=n;k++){
+    for(let i =1; i<=n; i++){
+      if((k*k)>=n){
+        return (100/k);
+      } 
+    }
+  }
+};
+
