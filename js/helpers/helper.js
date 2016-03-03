@@ -25,16 +25,16 @@ var Helpers = {
 		5:'fri',
 		6:'sat'
 	},
-	memoizedWidths:{},
+	_memoizedWidths:{},
 	findWidth: n =>{
-			let memoizedWidth = Helpers.memoizedWidths[n];
+			let memoizedWidth = Helpers._memoizedWidths[n];
 			if(memoizedWidth){
-				return this.memoizedWidth
+				return memoizedWidth;
 			}
 			 for (let k=1;k<=n;k++){
 			    for(let i =1; i<=n; i++){
 			      if((k*k)>=n){
-			      	memoizedWidth = Helpers.memoizedWidths[n] = 100/k;
+			      	memoizedWidth = Helpers._memoizedWidths[n] = 100/k;
 			        return memoizedWidth;
 			      } 
 			    }
