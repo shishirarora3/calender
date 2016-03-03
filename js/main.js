@@ -42,12 +42,8 @@ CalenderView.prototype.processContent = function(){
 	    });
 	}
 	for (let day in that.dayMap){
-		let people = peopleCollectionGroup[day];
-		if(people){
-			peopleCollectionGroup[day] = people.sort((a,b) => a.date-b.date );
-		}else{
-			peopleCollectionGroup[day] = [];
-		}
+		let people = peopleCollectionGroup[day] || [];
+		peopleCollectionGroup[day] = people.sort((a,b) => a.date-b.date );
 		this.render(people, day);
 	}
 	return that;
