@@ -42,7 +42,8 @@ CalenderView.prototype.processContent = function(){
 };
 CalenderView.prototype.render = function(people, day){
 	let calDay = document.querySelector(`[data-day=${dayMap[day]}]`),
-	classString;
+	classString,
+	peopleLength = people.length;
 
 	classString = calDay.className	;
 	if(!people.length){
@@ -51,7 +52,7 @@ CalenderView.prototype.render = function(people, day){
 		classString = classString.replace('day--empty','');
 	}
 	calDay.className = classString;
-	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person">${person['initials']}	</div>`,'');
+	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${findWidth(peopleLength)}%">${person['initials']}	</div>`,'');
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
 };
