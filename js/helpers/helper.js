@@ -25,7 +25,7 @@ var Helpers = {
         5: 'fri',
         6: 'sat'
     },
-    findWidth: function() {
+    getFindWidth: function() {
         var _memoizedWidths = {};
         return function(n) {
             let memoizedWidth = Helpers._memoizedWidths[n];
