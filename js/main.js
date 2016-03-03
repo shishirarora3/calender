@@ -1,25 +1,27 @@
 "use strict";
 
-var CalenderView = function(content){
-	this.content = content;
-	this.processContent();
-	this.attachEvents();
+var CalenderView = function(){
+	this.readInput().processContent().attachEvents();
 };
-CalenderView.prototype.processContent = function(yearInput){
-	var m;
-	var content = this.content;
-	var regPattern = findStrings(content,['name','birthday']);
-	var re = new RegExp(regPattern, 'g');
-	var  peopleCollectionGroup = this.peopleCollectionGroup = {};
+CalenderView.prototype.processContent = function(){
+	var that = this,
+	m,
+	content = that.calenderModel.content,
+	yearInput = thatcalenderModel.yearInput,
+	regPattern = findStrings(content,['name','birthday']),
+	re = new RegExp(regPattern, 'g'),
+	date,
+	day,
+	peopleCollectionGroup = this.peopleCollectionGroup = {};
 	while ((m = re.exec(content)) !== null) {
 	    if (m.index === re.lastIndex) {
 	        re.lastIndex++;
 	    }
-	    var date = new Date(m[2]);
-	    var day = date.getDay();
-	    yearInput && date.setYear( yearInput );
+	    yearInput && (m[2] = m[2].replace(/\/(\d{4})/g,yearInput));
+	    day = date.getDay();
+	    
 	    if(Number.isNaN(day)){
-	    	continue;
+	    	continue; //invalid date
 	    }
 	    var name= m[1];
 	    var nameSplitted = name.split(' ');
@@ -35,7 +37,8 @@ CalenderView.prototype.processContent = function(yearInput){
 		let people = peopleCollectionGroup[day];
 		peopleCollectionGroup[day] = people.sort((a,b) => a.date-b.date );
 		this.render(people, day);
-	}	
+	}
+	return that;
 };
 CalenderView.prototype.render = function(people, day){
 	let calDay = document.querySelector(`[data-day=${dayMap[day]}]`),
@@ -52,22 +55,26 @@ CalenderView.prototype.render = function(people, day){
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
 };
+CalenderView.prototype.readInput = function(){
+	var that = this;
+	that.calenderModel = {
+		content: document.getElementById('json-input').value,
+		yearInput: document.querySelector('.app__input').value
+	};
+	return that;
+};
 CalenderView.prototype.attachEvents = function(){
 	var that = this,
 	peopleCollectionGroup;
 	document.querySelector('.app__button').addEventListener('click',e=>{
-		var peopleCollectionGroup,
-		yearInput = document.querySelector('.app__input').value;
-		that.content = document.getElementById('json-input').value;
-		that.processContent(yearInput);
+		that.readInput();
+		that.processContent();
 	},false);
-
+	return that;
 };
 
 
-
-var calenderModel = document.getElementById('json-input').value;
-new CalenderView(calenderModel);
+new CalenderView();
 
 
 
