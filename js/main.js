@@ -8,7 +8,7 @@ CalenderView.prototype.processContent = function(){
 	m,
 	content = that.calenderModel.content,
 	yearInput = that.calenderModel.yearInput,
-	regPattern = findStrings(content,['name','birthday']),
+	regPattern = Helpers.findStrings(content,['name','birthday']),
 	re = new RegExp(regPattern, 'g'),
 	date,
 	day,
@@ -41,7 +41,7 @@ CalenderView.prototype.processContent = function(){
 	return that;
 };
 CalenderView.prototype.render = function(people, day){
-	let calDay = document.querySelector(`[data-day=${dayMap[day]}]`),
+	let calDay = document.querySelector(`[data-day=${Helpers.dayMap[day]}]`),
 	classString,
 	peopleLength = people.length;
 
@@ -52,7 +52,7 @@ CalenderView.prototype.render = function(people, day){
 		classString = classString.replace('day--empty','');
 	}
 	calDay.className = classString;
-	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${findWidth(peopleLength)}%">${person['initials']}	</div>`,'');
+	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${Helpers.findWidth(peopleLength)}%">${person['initials']}	</div>`,'');
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
 };
