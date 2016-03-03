@@ -55,7 +55,7 @@ CalenderView.prototype.render = function(people, day){
 	}
 	calDay.className = classString;
 	width = Helpers.findWidth(peopleLength);
-	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${width}%">${person['initials']}	</div>`,'');
+	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${width},height:${width}%">${person['initials']}	</div>`,'');
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
 	return this;
