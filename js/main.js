@@ -1,7 +1,7 @@
 "use strict";
 
 var CalenderView = function(){
-	this.readInput().processContent().render().attachEvents();
+	this.readInput().processContent().attachEvents();
 };
 CalenderView.prototype.processContent = function(){
 	var that = this,
@@ -70,7 +70,7 @@ CalenderView.prototype.attachEvents = function(){
 	var that = this,
 	peopleCollectionGroup;
 	document.querySelector('.app__button').addEventListener('click',e=>{
-		this.readInput().processContent().render();
+		this.readInput().processContent();
 	},false);
 	return that;
 };
