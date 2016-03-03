@@ -7,7 +7,7 @@ var CalenderView = function(){
 CalenderView.prototype.init = function(){
 	var that = this;
 	that.findWidth = Helpers.getFindWidth();
-	that.dayMap = Helpers.dayMap[day];
+	that.dayMap = Helpers.dayMap;
 	return that;
 },
 CalenderView.prototype.processContent = function(){
