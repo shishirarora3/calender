@@ -33,11 +33,9 @@ var Helpers = {
                 return memoizedWidth;
             }
             for (let k = 1; k <= n; k++) {
-                for (let i = 1; i <= n; i++) {
-                    if ((k * k) >= n) {
+                if ((k * k) >= n) {
                         memoizedWidth = _memoizedWidths = 100 / k;
                         return memoizedWidth;
-                    }
                 }
             }
         };
