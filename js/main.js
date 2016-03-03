@@ -17,7 +17,7 @@ CalenderView.prototype.processContent = function(){
 	    if (m.index === re.lastIndex) {
 	        re.lastIndex++;
 	    }
-	    yearInput && (m[2] = m[2].replace(/\/(\d{4})/g,yearInput));
+	    yearInput && (m[2] = m[2].replace(/(\d{4})/g,yearInput));
 	    date = new Date(m[2]);
 	    day = date.getDay();
 	    
