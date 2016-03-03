@@ -1,6 +1,7 @@
 "use strict";
 
 var CalenderView = function(){
+	this.findWidth = Helpers.getFindWidth();
 	this.readInput().processContent().attachEvents();
 };
 CalenderView.prototype.processContent = function(){
@@ -42,7 +43,8 @@ CalenderView.prototype.processContent = function(){
 	return that;
 };
 CalenderView.prototype.render = function(people, day){
-	let calDay = document.querySelector(`[data-day=${Helpers.dayMap[day]}]`),
+	let that=this,
+	calDay = document.querySelector(`[data-day=${Helpers.dayMap[day]}]`),
 	classString,
 	peopleLength = people.length,
 	width;
@@ -54,11 +56,11 @@ CalenderView.prototype.render = function(people, day){
 		classString = classString.replace('day--empty','');
 	}
 	calDay.className = classString;
-	width = Helpers.findWidth(peopleLength);
+	width = that.findWidth(peopleLength);
 	var dayPersonHtml = people.reduce((res,person) => res + `<div class="day__person" style="width:${width}%;height:${width}%">${person['initials']}	</div>`,'');
 	var elem = calDay.querySelector('.day__people');
 	elem && (elem.innerHTML = dayPersonHtml);
-	return this;
+	return that;
 };
 CalenderView.prototype.readInput = function(){
 	var that = this;
