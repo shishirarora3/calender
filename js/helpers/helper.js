@@ -28,14 +28,14 @@ var Helpers = {
     getFindWidth: function() {
         var _memoizedWidths = {};
         return function(n) {
-            let memoizedWidth = Helpers._memoizedWidths[n];
+            let memoizedWidth = _memoizedWidths[n];
             if (memoizedWidth) {
                 return memoizedWidth;
             }
             for (let k = 1; k <= n; k++) {
                 for (let i = 1; i <= n; i++) {
                     if ((k * k) >= n) {
-                        memoizedWidth = Helpers._memoizedWidths[n] = 100 / k;
+                        memoizedWidth = _memoizedWidths = 100 / k;
                         return memoizedWidth;
                     }
                 }
