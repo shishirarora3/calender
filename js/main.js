@@ -1,9 +1,15 @@
 "use strict";
 
 var CalenderView = function(){
-	this.findWidth = Helpers.getFindWidth();
-	this.readInput().processContent().attachEvents();
+	
+	this.init().readInput().processContent().attachEvents();
 };
+CalenderView.prototype.init = function(){
+	var that = this;
+	that.findWidth = Helpers.getFindWidth();
+	that.dayMap = Helpers.dayMap[day];
+	return that;
+},
 CalenderView.prototype.processContent = function(){
 	var that = this,
 	m,
@@ -35,16 +41,20 @@ CalenderView.prototype.processContent = function(){
 	    	initials: nameSplitted[0].charAt(0)+nameSplitted[1].charAt(0)
 	    });
 	}
-	for (let day in peopleCollectionGroup){
+	for (let day in that.dayMap){
 		let people = peopleCollectionGroup[day];
-		peopleCollectionGroup[day] = people.sort((a,b) => a.date-b.date );
+		if(people){
+			peopleCollectionGroup[day] = people.sort((a,b) => a.date-b.date );
+		}else{
+			peopleCollectionGroup[day] = [];
+		}
 		this.render(people, day);
 	}
 	return that;
 };
 CalenderView.prototype.render = function(people, day){
 	let that=this,
-	calDay = document.querySelector(`[data-day=${Helpers.dayMap[day]}]`),
+	calDay = document.querySelector(`[data-day=${that.dayMap[day]}]`),
 	classString,
 	peopleLength = people.length,
 	width;
