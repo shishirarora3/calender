@@ -21,25 +21,93 @@
             <p>
               <strong>Birthday Cal</strong> is a week long calendar!
             </p>
-            
+            <p>
+              Render a card for each day of the week.
+              For a given <em>year</em>, figure out whose birthday belongs to which card.
+              Place people's initials in the card according to these rules -
+            </p>
             <p>
               <ul>
-                <li>Each person renders as square</li>
-                <li>Person's initials are used to label birthdays</li>
-                <li>Ordered people inside the card based on their age (youngest to oldest)</li>
-                <li>Each square in a card kept of equal size andfills up as much space in the card as possible</li>
+                <li>Each person must always be rendered as square</li>
+                <li>Use person's initials to label birthdays</li>
+                <li>Order people inside the card based on their age (youngest to oldest)</li>
+                <li>Each square in a card must be of equal size and should fill up as much space in the card as possible</li>
               </ul>
             </p>
-           
+            <p>
+              <strong>Examples &dash;</strong>
+              <img class="intro__example" src="img/display-rules.png" />
+            </p>
           </div>
-          
+          <div class="intro__helpers">
+            <p>
+              <strong>Submitting your work &dash;</strong>
+              <ul>
+                <li>
+                  Your submission should be functional within this page - see <a href="#work-area">work area</a>.
+                </li>
+                <li>
+                  Write your code in pure JS.
+                </li>
+                <li>
+                  Use <code>day--empty</code> class on <code>.cal__day</code> to render empty calendar dates. Use <code>.day__person</code> to render birthdays. See source.
+                </li>
+                <li>
+                  Submit back the completed task as a compressed zip of this git repo with your commits on top. Feel free to share over Dropbox / Email.
+                </li>
+              </ul>
+            </p>
+            <p>
+              <strong>Evaluation criteria &dash;</strong>
+              <ul>
+                <li>functionality coverage</li>
+                <li>readable and efficient code</li>
+                <li>should handle edge cases</li>
+                <li>maintainability</li>
+              </ul>
+            </p>
+
+          </div>
         </div>
 
         <hr class="border-line app__border" />
 
         <div id="work-area">
-          
-          
+          <h1 class="cal__title">Work Area</h1>
+          <ul class="calendar clearfix js-calendar">
+            <!-- TODO: this is marked as an empty day for purpose of illustration -->
+            <li class="cal__day day--empty" data-day="mon">
+              <div class="day__date"></div>
+              <div class="day__people"></div>
+            </li>
+            <li class="cal__day" data-day="tue">
+              <div class="day__date"></div>
+              <div class="day__people">
+                <!-- TODO: this day is filled with one person for purpose of illustration -->
+                <div class="day__person">AB</div>
+              </div>
+            </li>
+            <li class="cal__day" data-day="wed">
+              <div class="day__date"></div>
+              <div class="day__people"></div>
+            </li>
+            <li class="cal__day" data-day="thu">
+              <div class="day__date"></div>
+              <div class="day__people"></div>
+            </li>
+            <li class="cal__day" data-day="fri">
+              <div class="day__date"></div>
+              <div class="day__people"></div>
+            </li>
+            <li class="cal__day" data-day="sat">
+              <div class="day__date"></div>
+              <div class="day__people"></div>
+            </li>
+            <li class="cal__day" data-day="sun">
+              <div class="day__date"></div>
+              <div class="day__people"></div>
+            </li>
+          </ul>
 
           <div class="app__inputs">
 
